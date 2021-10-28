@@ -1,0 +1,34 @@
+DATASET:
+  DATA_ROOT: /home/hkzhang/Documents/sdb_a/nas_data
+  DATA_NAME: SIM_noise1800_train
+  CROP_SIZE: 64
+  TASK: "denoise"
+  LOAD_ALL: True
+  TO_GRAY: True
+SEARCH:
+  SEARCH_ON: True
+  ARCH_START_EPOCH: 20
+MODEL:
+  META_ARCHITECTURE: AutoMultiTask
+  META_MODE: Width
+  NUM_STRIDES: 3
+  NUM_LAYERS: 4
+  NUM_BLOCKS: 5
+  FILTER_MULTIPLIER: 10
+  IN_CHANNEL: 1
+  PRIMITIVES: "CSDD"
+  AFFINE: False
+DATALOADER:
+  BATCH_SIZE_TRAIN: 1
+  BATCH_SIZE_TEST: 1
+  NUM_WORKERS: 2
+  SIGMA: [30, 50, 70]
+  DATA_LIST_DIR: ../preprocess/dataset_json
+
+SOLVER:
+  LOSS: ['mse', 'log_ssim']
+  LOSS_WEIGHT: [1.0, 0.5]
+  MAX_EPOCH: 100
+
+OUTPUT_DIR: output
+RESULT_DIR: 2c3n
